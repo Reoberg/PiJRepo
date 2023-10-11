@@ -9,31 +9,52 @@ final static String dataCommand = "DATA";
 
     private static boolean mailCommandValidation(String input){
         int commandLength = mailFromCommand.length();
+        if (commandLength > input.length()){
+            return false;
+        }
+        else {
+            return input.substring(0, commandLength).equals(mailFromCommand);
+        }
 
-        return input.substring(0, commandLength).equals(mailFromCommand);
     }
     private static boolean rcptoCommandValidation(String input){
         int commandLength = rcptoCommand.length();
+        if (commandLength > input.length()){
+            return false;
+        }
+        else{
+            return input.substring(0, commandLength).equals(rcptoCommand);
+        }
 
-        return input.substring(0, commandLength).equals(rcptoCommand);
     }
     private static boolean dataCommandValidation(String input){
         int commandLength = dataCommand.length();
+        if (commandLength > input.length()){
+            return false;
+        }
+        else{
+            return input.substring(0, commandLength).equals(dataCommand);
+        }
 
-        return input.substring(0, commandLength).equals(dataCommand);
     }
 
     private static boolean emailValidation(String input, String command){
         boolean valid = false;
         char current;
-        String inputWithoutCommand = input.substring(command.length());
-      for(int i=0; i < inputWithoutCommand.length(); i++)
-      {
-          current = inputWithoutCommand.charAt(i);
-          if (current == validationSymbol && i != 0 && i != inputWithoutCommand.length()-1){
-              valid = true;
-          }
-      }
+        String inputWithoutCommand;
+        if (command.length()> input.length()){
+            valid = false;
+        }
+        else{
+            inputWithoutCommand = input.substring(command.length());
+            for(int i=0; i < inputWithoutCommand.length(); i++)
+            {
+                current = inputWithoutCommand.charAt(i);
+                if (current == validationSymbol && i != 0 && i != inputWithoutCommand.length()-1){
+                    valid = true;
+                }
+            }
+        }
 
       return valid;
     }
